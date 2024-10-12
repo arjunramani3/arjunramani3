@@ -1,8 +1,8 @@
-<!-- styles.css -->
+/* styles.css */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .container {
@@ -11,12 +11,15 @@ body {
     min-height: 100vh;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .content {
     flex: 1;
-    max-width: 800px;
+    max-width: 800px;  /* Adjust this value as needed */
     padding: 20px;
+    padding-left: 40px;  /* Increase left padding */
+    margin-right: 40px;  /* Add right margin to create space between content and sidebar */
 }
 
 .content h2 {
@@ -66,6 +69,7 @@ body {
 .sidebar {
     width: 150px;
     padding: 20px;
+    padding-right: 0;  /* Remove right padding */
 }
 
 .sidebar ul {
@@ -117,4 +121,64 @@ h1 {
     width: auto;
     object-fit: cover;
     border: 1px solid #ddd;
+}
+
+/* If you want to ensure the sidebar stays on the right even on very wide screens */
+@media (min-width: 1240px) {  /* 1200px + 40px for container padding */
+    .container {
+        position: relative;
+    }
+    .sidebar {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+  /* Adjust layout for mobile */
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  /* Increase touch targets */
+  button, 
+  .nav-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Adjust font sizes */
+  body {
+    font-size: 16px;
+  }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+
+  /* Simplify navigation */
+  .nav-menu {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  /* Optimize images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Adjust spacing */
+  .section {
+    margin-bottom: 20px;
+  }
+
+  /* Single column layout */
+  .column {
+    width: 100%;
+    float: none;
+  }
 }
