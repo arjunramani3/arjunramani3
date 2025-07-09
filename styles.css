@@ -83,12 +83,18 @@ body {
 }
 
 .sidebar ul li a {
+    color: #008080;
     text-decoration: none;
-    color: #0000EE;  /* Standard blue for unvisited links */
+    transition: color 0.2s;
 }
 
 .sidebar ul li a:visited {
-    color: #551A8B;  /* Standard purple for visited links */
+    color: #008080;
+}
+
+.sidebar ul li a:hover {
+    color: #005959;
+    text-decoration: underline;
 }
 
 .profile-photo {
@@ -181,4 +187,19 @@ h1 {
     width: 100%;
     float: none;
   }
+}
+
+a, .sidebar ul li a, .toc-list a, .footnote-ref, .footnote-back, .nav-back a {
+    color: #008080;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:visited, .sidebar ul li a:visited, .toc-list a:visited, .footnote-ref:visited, .footnote-back:visited, .nav-back a:visited {
+    color: #008080;
+}
+
+a:hover, .sidebar ul li a:hover, .toc-list a:hover, .footnote-ref:hover, .footnote-back:hover, .nav-back a:hover {
+    color: #005959;
+    text-decoration: underline;
 }

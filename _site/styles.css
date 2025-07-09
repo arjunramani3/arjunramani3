@@ -1,0 +1,205 @@
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.content {
+    flex: 1;
+    max-width: 800px;  /* Adjust this value as needed */
+    padding: 20px;
+    padding-left: 40px;  /* Increase left padding */
+    margin-right: 40px;  /* Add right margin to create space between content and sidebar */
+}
+
+.content h2 {
+    margin-top: 30px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.content ul {
+    padding-left: 20px;
+}
+
+.content ul li {
+    margin-bottom: 10px;
+}
+
+/* Style for research items, if you want them to look different */
+.content ul li.research-item {
+    font-style: italic;
+}
+
+.content ul li.research-item .title {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.content ul li.research-item .venue {
+    font-style: normal;
+    color: #666;
+}
+
+/* Style for writing items, if you want them to look different */
+.content ul li.writing-item {
+    font-style: italic;
+}
+
+.content ul li.writing-item .title {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.content ul li.writing-item .publication {
+    font-style: normal;
+    color: #666;
+}
+
+.sidebar {
+    width: 150px;
+    padding: 20px;
+    padding-right: 0;  /* Remove right padding */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #008080;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sidebar ul li a:visited {
+    color: #008080;
+}
+
+.sidebar ul li a:hover {
+    color: #005959;
+    text-decoration: underline;
+}
+
+.profile-photo {
+    width: 200px;
+    height: auto;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.cover-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cover-images img {
+    height: 150px;
+    width: auto;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+/* If you want to ensure the sidebar stays on the right even on very wide screens */
+@media (min-width: 1240px) {  /* 1200px + 40px for container padding */
+    .container {
+        position: relative;
+    }
+    .sidebar {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+  /* Adjust layout for mobile */
+  .container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  /* Increase touch targets */
+  button, 
+  .nav-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Adjust font sizes */
+  body {
+    font-size: 16px;
+  }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+
+  /* Simplify navigation */
+  .nav-menu {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  /* Optimize images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Adjust spacing */
+  .section {
+    margin-bottom: 20px;
+  }
+
+  /* Single column layout */
+  .column {
+    width: 100%;
+    float: none;
+  }
+}
+
+a, .sidebar ul li a, .toc-list a, .footnote-ref, .footnote-back, .nav-back a {
+    color: #008080;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:visited, .sidebar ul li a:visited, .toc-list a:visited, .footnote-ref:visited, .footnote-back:visited, .nav-back a:visited {
+    color: #008080;
+}
+
+a:hover, .sidebar ul li a:hover, .toc-list a:hover, .footnote-ref:hover, .footnote-back:hover, .nav-back a:hover {
+    color: #005959;
+    text-decoration: underline;
+}
