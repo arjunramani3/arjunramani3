@@ -1,0 +1,9 @@
+title: Arjun Ramani's Personal Homepage
+author: Arjun Ramani
+description: Research and writing on economics and technology
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-include-cache  
+  - jekyll-optional-front-matter
+theme: null

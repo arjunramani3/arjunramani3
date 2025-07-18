@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispatches from India</title>
+    <link rel="stylesheet" href="/styles.css">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://arjunramani.com/india-dispatch">
+    <meta property="og:title" content="Dispatches from India">
+    <meta property="og:description" content="What I learned covering the world's biggest country for The Economist">
+    <meta property="og:image" content="https://arjunramani.com/india-economy-cover.jpg">
+    <meta property="og:article:author" content="Arjun Ramani">
+    <meta property="og:article:published_time" content="2025-07-01">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://arjunramani.com/india-dispatch">
+    <meta property="twitter:title" content="Dispatches from India">
+    <meta property="twitter:description" content="What I learned covering the world's biggest country for The Economist">
+    <meta property="twitter:image" content="https://arjunramani.com/india-economy-cover.jpg">
+
+    <style>
+        /* Essay-specific styles extending base styles */
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 60px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+         .author-info {
+            font-size: 1.1em;
+            color: #777;
+        }
+
+        .date {
+            font-size: 1em;
+            color: #888;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .introduction {
+            font-size: 1em;
+            margin-bottom: 10px;
+            padding: 20px 0;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .introduction p {
+            text-align: left;
+        }
+
+        .toc {
+            margin: 20px 0;
+        }
+
+        .toc-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            text-align: left;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-left: 30px;
+        }
+
+        .toc-list li {
+            margin-bottom: 1px;
+            font-size: 1em;
+        }
+
+        .section {
+            margin: 60px 0;
+            scroll-margin-top: 20px;
+        }
+
+        .section-header {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .section-content {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Footnote popover styles */
+        .footnote-popover {
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            max-width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #555;
+            display: none;
+        }
+
+        .footnote-popover.show {
+            display: block;
+        }
+
+        /* Instant scrolling for all links */
+        .footnote-ref {
+            color: #008080;
+            text-decoration: none;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+            cursor: pointer;
+        }
+
+        .footnote-ref:hover {
+            color: #005959;
+            text-decoration: underline;
+        }
+
+        .footnote-back {
+            color: #008080;
+            text-decoration: none;
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+
+        .footnote-back:hover {
+            color: #005959;
+            text-decoration: underline;
+        }
+
+        /* Hide the footnotes section since we're using popovers */
+        .footnotes {
+            display: none;
+        }
+
+        .footnote-number {
+            color: #008080;
+            font-weight: bold;
+        }
+
+        /* Navigation back to main site */
+        .nav-back {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .nav-back a {
+            color: #008080;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .nav-back a:hover {
+            color: #005959;
+            text-decoration: underline;
+        }
+
+        /* Remove smooth scrolling - make all jumps instant */
+        html {
+            scroll-behavior: auto;
+        }
+
+        /* Mobile-specific styles */
+        @media screen and (max-width: 768px) {
+          /* Adjust layout for mobile */
+          .container {
+            width: 100%;
+            padding: 0 15px;
+          }
+
+          /* Increase touch targets */
+          button, 
+          .nav-link {
+            min-height: 44px;
+            min-width: 44px;
+          }
+
+          /* Adjust font sizes */
+          body {
+            font-size: 16px;
+          }
+          h1 { font-size: 24px; }
+          h2 { font-size: 20px; }
+
+          /* Simplify navigation */
+          .nav-menu {
+            display: none;
+          }
+          .mobile-menu-toggle {
+            display: block;
+          }
+
+          /* Optimize images */
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+
+          /* Adjust spacing */
+          .section {
+            margin-bottom: 20px;
+          }
+
+          /* Single column layout */
+          .column {
+            width: 100%;
+            float: none;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <div class="header">
+                <div class="title">Dispatches from India</div>
+                <div class="subtitle">What I learned covering the world's biggest country for The Economist</div>
+                <div class ="author-info">Arjun Ramani</div>
+                <div class="date">July 1 2025</div>
+            </div>
+
+            <div class="introduction">
+                <p><i>Before starting my PhD this past fall, I spent three years as a journalist for The Economist. The final year was the best: I was based in India, lived in Mumbai and New Delhi, and traveled across 10 states and over 30 cities and villages as the country carried out history’s largest election. I was responsible for the paper’s India economics coverage which culminated in a 10-page special report and cover story on the economy, and on a personal note, grew so much closer to my motherland.</i></p>
+
+                <p><i>The central challenge of reporting on India is that as a vast, heterogeneous and half-modernised state, information is often dispersed and held privately. This muddles the official external picture of the country, while giving power to the myriad “information brokers” and “fixers” who see reality clearly. Finding those oftentimes unexpected guides made writing there so rewarding, and I hope to share that with you here.</i></p>
+
+                <p><i>It is surprising how few international resources go into understanding India on the ground given its growing importance. India has 1.4bn people and counting, is compounding at a 7% growth rate, just surpassed Japan to become the world’s 4th biggest economy, and will plausibly become <a href="https://www.goldmansachs.com/pdfs/insights/pages/gs-research/the-path-to-2075-slower-global-growth-but-convergence-remains-intact/report.pdf">the biggest</a> within my lifetime. While China is upending the world order today, India may be just as important to the 21st century.</i></p>
+            </div>
+
+            <div class="toc">
+                <div class="toc-title">Contents</div>
+                <ul class="toc-list">
+                    <li><a href="#decentralisation">I. Decentralisation: a subcontinent of nations</a></li>
+                    <li><a href="#illegibility">II. Illegibility: the second ledger</a></li>
+                    <li><a href="#revolutions">III. Revolutions: the new Khan Market gang</a></li>
+                    <li><a href="#technology">IV. Technology: Bangalore and more</a></li>
+                    <li><a href="#growth">V. Growth: the elephant is moving</a></li>
+                    <li><a href="#travel">VI. Travel: religion and reels</a></li>
+
+                    <li><a href="#economist">An unexpected journey to Covent Garden</a></li>
+                    <li><a href="#photos">More photos of underrated things</a></li>
+                </ul>
+            </div>
+
+            <div class="section" id="decentralisation">
+                <div class="section-header">I. Decentralisation: A subcontinent of nations</div>
+                <div class="section-content">
+                    <p>India's demographic profile represents one of its greatest economic assets. With a median age of approximately 28 years, the country possesses the world's largest working-age population<a href="#footnote1" id="footnote-ref-1" class="footnote-ref">1</a>. This demographic dividend, however, is not automatically convertible into economic growth—it requires strategic policy interventions and substantial investments in human capital development.</p>
+
+                    <p>The potential of India's young population is evident in several key sectors. The technology industry, for instance, has already demonstrated how demographic advantages can translate into global competitiveness. However, realizing the full potential of this demographic dividend requires addressing significant challenges in education, skill development, and job creation<a href="#footnote2" id="footnote-ref-2" class="footnote-ref">2</a>.</p>
+
+                    <p>Labor force participation rates, particularly among women, remain concerningly low. Female labor force participation has actually declined in recent decades, representing a significant underutilization of human resources. Addressing this challenge through policy reforms, cultural shifts, and infrastructure development could substantially amplify India's demographic advantages.</p>
+                </div>
+            </div>
+
+            <div class="section" id="digital-transformation">
+                <div class="section-header">2. Digital Transformation and Innovation</div>
+                <div class="section-content">
+                    <p>India's digital transformation story is perhaps one of the most remarkable economic developments of the 21st century. The country has leapfrogged traditional infrastructure constraints through innovative digital solutions, creating new pathways for economic inclusion and growth<a href="#footnote3" id="footnote-ref-3" class="footnote-ref">3</a>.</p>
+
+                    <p>The Unified Payments Interface (UPI) system exemplifies this transformation, processing billions of transactions monthly and enabling financial inclusion for previously unbanked populations. This digital infrastructure has created the foundation for a broader fintech ecosystem that serves both domestic needs and global markets.</p>
+
+                    <p>However, the digital divide remains a significant challenge. While urban India increasingly resembles developed economies in terms of digital adoption, rural areas often lack basic connectivity infrastructure. Bridging this gap is essential for ensuring that digital transformation benefits all segments of society and contributes to inclusive growth.</p>
+                </div>
+            </div>
+
+            <div class="section" id="infrastructure-development">
+                <div class="section-header">3. Infrastructure Development</div>
+                <div class="section-content">
+                    <p>Infrastructure development represents both India's greatest challenge and its most significant opportunity for economic acceleration. The country's infrastructure needs are enormous, spanning transportation, energy, water, and telecommunications systems<a href="#footnote4" id="footnote-ref-4" class="footnote-ref">4</a>.</p>
+
+                    <p>Recent years have seen substantial government investments in infrastructure projects, from high-speed rail corridors to renewable energy installations. These investments not only address immediate infrastructure gaps but also create employment opportunities and stimulate economic activity across multiple sectors.</p>
+
+                    <p>The financing of infrastructure development remains a critical challenge. Public resources alone are insufficient to meet India's infrastructure needs, necessitating innovative financing mechanisms and greater private sector participation. The development of infrastructure bonds, public-private partnerships, and foreign investment frameworks will be crucial for sustaining infrastructure development momentum.</p>
+                </div>
+            </div>
+
+            <div class="section" id="manufacturing-services">
+                <div class="section-header">4. Manufacturing vs. Services Economy</div>
+                <div class="section-content">
+                    <p>India's economic structure has evolved uniquely among major developing economies, with services becoming the dominant sector before manufacturing reached its full potential. This "services-first" development path has created both advantages and challenges for future growth<a href="#footnote5" id="footnote-ref-5" class="footnote-ref">5</a>.</p>
+
+                    <p>The services sector, particularly information technology and business process outsourcing, has demonstrated India's capability to compete globally in knowledge-intensive industries. However, manufacturing remains underdeveloped relative to other economies at similar development levels, limiting job creation for the broader population.</p>
+
+                    <p>Recent policy initiatives, including "Make in India" and production-linked incentive schemes, aim to strengthen manufacturing capabilities. Success in this area could significantly accelerate job creation and export growth, while reducing dependence on imports for essential goods.</p>
+                </div>
+            </div>
+
+            <div class="section" id="global-integration">
+                <div class="section-header">5. Global Integration and Trade</div>
+                <div class="section-content">
+                    <p>India's integration into global value chains represents a critical dimension of its economic strategy. The country's approach to trade policy has evolved significantly, balancing domestic industry protection with the benefits of international competition and collaboration<a href="#footnote6" id="footnote-ref-6" class="footnote-ref">6</a>.</p>
+
+                    <p>Recent geopolitical developments have created new opportunities for India to position itself as an alternative manufacturing destination for global supply chains. The "China+1" strategy adopted by many multinational corporations could benefit India, provided it can offer competitive manufacturing capabilities and reliable business environments.</p>
+
+                    <p>However, trade integration also presents challenges, particularly for domestic industries that may struggle to compete with international players. Developing effective adjustment mechanisms and support systems for affected workers and regions will be essential for maintaining social cohesion while pursuing greater global integration.</p>
+                </div>
+            </div>
+
+            <div class="section" id="sustainability-challenges">
+                <div class="section-header">6. Sustainability and Environmental Challenges</div>
+                <div class="section-content">
+                    <p>Environmental sustainability has emerged as a central challenge for India's continued economic development. The country faces the dual challenge of meeting growing energy and resource needs while addressing climate change commitments and environmental quality concerns<a href="#footnote7" id="footnote-ref-7" class="footnote-ref">7</a>.</p>
+
+                    <p>India's renewable energy expansion represents one of the world's most ambitious clean energy transitions. The country has set targets for massive solar and wind capacity additions, which could position it as a global leader in clean energy technologies and manufacturing.</p>
+
+                    <p>Urban air quality, water scarcity, and waste management represent immediate sustainability challenges that require urgent attention. These environmental issues not only affect quality of life but also impose economic costs through health impacts and resource constraints.</p>
+                </div>
+            </div>
+
+            <div class="section" id="governance-reforms">
+                <div class="section-header">7. Governance and Institutional Reforms</div>
+                <div class="section-content">
+                    <p>The quality of governance and institutions plays a crucial role in determining India's economic trajectory. Recent years have seen significant efforts to improve government efficiency, reduce corruption, and streamline business processes<a href="#footnote8" id="footnote-ref-8" class="footnote-ref">8</a>.</p>
+
+                    <p>Digital governance initiatives have improved service delivery and reduced opportunities for corruption in many areas. The implementation of goods and services tax (GST) has simplified India's complex tax structure, though implementation challenges remain.</p>
+
+                    <p>Judicial reforms, regulatory clarity, and rule of law enforcement continue to be areas requiring attention. Strengthening these institutional foundations is essential for attracting investment and ensuring sustainable economic growth.</p>
+                </div>
+            </div>
+
+            <div class="section" id="conclusion">
+                <div class="section-header">8. Conclusion: Charting the Path Forward</div>
+                <div class="section-content">
+                    <p>India's economic future depends on successfully navigating multiple complex challenges while capitalizing on significant opportunities. The country's demographic advantages, technological capabilities, and growing global influence provide a strong foundation for continued growth.</p>
+
+                    <p>However, realizing India's full economic potential requires sustained commitment to reforms across multiple dimensions—from education and infrastructure to governance and environmental sustainability. The choices made in the coming decade will largely determine whether India can join the ranks of developed economies.</p>
+
+                    <p>The path forward is neither predetermined nor without risks. Success will require adaptive policymaking, inclusive growth strategies, and the ability to balance competing priorities. Yet the potential rewards—for India and the global economy—make this journey one of the most significant economic stories of our time.</p>
+                </div>
+            </div>
+            <div>
+                <h2>Subscribe for updates</h2>
+                <p>
+                    I write rarely. To receive updates, you can <a href="https://arjunramani.substack.com/welcome">subscribe by email</a> or via <a href="/feed.xml" target="_blank">RSS</a>
+                </p>
+            </div>
+        </div>
+        <nav class="sidebar">
+            <ul>
+                <li><a href="/index.html">About</a></li>
+                <li><a href="/research.html">Research</a></li>
+                <li><a href="/writing.html">Writing</a></li>
+                <li><a href="/cv.html">CV</a></li>
+                <li><a href="https://arjunramani.substack.com/welcome">Subscribe</a> / <a href="/feed.xml" target="_blank">RSS</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1YFKE5YHG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N1YFKE5YHG');
+    </script>
+
+    <!-- Footnote popover functionality -->
+    <script>
+        const footnotes = {
+            'footnote1': 'United Nations Population Division, World Population Prospects 2022. India\'s working-age population (15-64 years) is projected to peak around 2050.',
+            'footnote2': 'International Labour Organization (2023). Skills development and demographic dividend utilization remain critical challenges for emerging economies.',
+            'footnote3': 'Reserve Bank of India data shows UPI transactions exceeded 100 billion annually by 2023, demonstrating unprecedented digital payment adoption.',
+            'footnote4': 'World Bank estimates suggest India needs to invest 6-8% of GDP annually in infrastructure to sustain growth rates of 8-9%.',
+            'footnote5': 'Unlike East Asian development models, India\'s services sector grew to over 50% of GDP before manufacturing reached 20%, creating unique development challenges and opportunities.',
+            'footnote6': 'India\'s trade-to-GDP ratio remains relatively low compared to other major economies, suggesting significant potential for increased global integration.',
+            'footnote7': 'India accounts for approximately 7% of global carbon emissions while representing 17% of world population, highlighting both responsibility and development needs.',
+            'footnote8': 'World Bank\'s Ease of Doing Business rankings showed significant improvement for India between 2014-2020, though challenges remain in judicial and regulatory reforms.'
+        };
+
+        // Create popover element
+        const popover = document.createElement('div');
+        popover.className = 'footnote-popover';
+        document.body.appendChild(popover);
+
+        // Add click handlers to footnote references
+        document.querySelectorAll('.footnote-ref').forEach(ref => {
+            ref.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const footnoteId = this.getAttribute('href').substring(1);
+                const footnoteText = footnotes[footnoteId];
+                
+                if (footnoteText) {
+                    // Hide popover if clicking the same footnote
+                    if (popover.classList.contains('show') && popover.dataset.currentFootnote === footnoteId) {
+                        popover.classList.remove('show');
+                        return;
+                    }
+                    
+                    // Update popover content and position
+                    popover.innerHTML = footnoteText;
+                    popover.dataset.currentFootnote = footnoteId;
+                    
+                    // Position popover next to the clicked footnote
+                    const rect = this.getBoundingClientRect();
+                    popover.style.left = (rect.right + 10) + 'px';
+                    popover.style.top = (rect.top + window.scrollY) + 'px';
+                    
+                    // Show popover
+                    popover.classList.add('show');
+                }
+            });
+        });
+
+        // Close popover when clicking elsewhere
+        document.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('footnote-ref') && !popover.contains(e.target)) {
+                popover.classList.remove('show');
+            }
+        });
+
+        // Close popover on scroll
+        window.addEventListener('scroll', function() {
+            popover.classList.remove('show');
+        });
+    </script>
+</body>
+</html>

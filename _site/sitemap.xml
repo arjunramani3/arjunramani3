@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/india-dispatch</loc>
+</url>
+<url>
+<loc>http://localhost:4000/Ramani,%20Arjun%20CV.pdf</loc>
+<lastmod>2025-05-21T00:13:55-04:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/cv.html</loc>
+<lastmod>2025-06-30T02:42:48-04:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/portfolio.html</loc>
+<lastmod>2025-01-17T18:43:02-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/research.html</loc>
+<lastmod>2025-06-30T02:42:23-04:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/writing.html</loc>
+<lastmod>2025-07-09T05:46:26-04:00</lastmod>
+</url>
+</urlset>
