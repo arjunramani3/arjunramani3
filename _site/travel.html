@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Arjun Ramani - Travel</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        .travel-map-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .travel-map {
+            width: 100%;
+            height: auto;
+        }
+
+        .country {
+            stroke: #ccc;
+            stroke-width: 0.5;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .country.unvisited {
+            fill: #ffffff;
+        }
+
+        .country.visited {
+            fill: #008080;
+        }
+
+        .country:hover {
+            opacity: 0.7;
+            stroke: #005959;
+            stroke-width: 1;
+        }
+
+        .tooltip {
+            position: absolute;
+            padding: 10px;
+            background: white;
+            border: 2px solid #008080;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            max-width: 300px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tooltip h3 {
+            margin: 0 0 10px 0;
+            color: #008080;
+            font-size: 1.1em;
+        }
+
+        .tooltip .cities {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .tooltip .links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tooltip .links li {
+            margin: 5px 0;
+        }
+
+        .tooltip .links a {
+            color: #008080;
+            text-decoration: none;
+        }
+
+        .tooltip .links a:hover {
+            color: #005959;
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 768px) {
+            .travel-map-container {
+                margin: 15px 0;
+            }
+
+            .tooltip {
+                max-width: 250px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="top-nav">
+                <a href="index.html" class="nav-name">Arjun Ramani</a>
+                <nav class="nav-links">
+                    <a href="research.html">Research</a>
+                    <a href="writing.html">Writing</a>
+                    <a href="travel.html">Travel</a>
+                    <a href="cv.html">CV</a>
+                    <span class="subscribe-rss">
+                        <a href="https://arjunramani.substack.com/welcome">Subscribe</a>/<a href="/feed.xml" target="_blank">RSS</a>
+                    </span>
+                </nav>
+            </div>
+
+            <h2>Travel</h2>
+            <p>These are all the places I've travelled. I'd like more of the map to be colored.</p>
+
+            <div class="travel-map-container">
+                <svg class="travel-map" viewBox="0 0 960 500"></svg>
+            </div>
+
+            <div class="tooltip"></div>
+        </div>
+    </div>
+
+    <script>
+        // ISO 3166-1 numeric codes to country names mapping (zero-padded to match TopoJSON)
+        const countryIdToName = {
+            "004": "Afghanistan", "008": "Albania", "012": "Algeria", "020": "Andorra", "024": "Angola",
+            "028": "Antigua and Barbuda", "032": "Argentina", "051": "Armenia", "036": "Australia",
+            "040": "Austria", "031": "Azerbaijan", "044": "Bahamas", "048": "Bahrain", "050": "Bangladesh",
+            "052": "Barbados", "112": "Belarus", "056": "Belgium", "084": "Belize", "204": "Benin",
+            "064": "Bhutan", "068": "Bolivia", "070": "Bosnia and Herzegovina", "072": "Botswana",
+            "076": "Brazil", "096": "Brunei", "100": "Bulgaria", "854": "Burkina Faso", "108": "Burundi",
+            "116": "Cambodia", "120": "Cameroon", "124": "Canada", "132": "Cape Verde",
+            "140": "Central African Republic", "148": "Chad", "152": "Chile", "156": "China",
+            "170": "Colombia", "174": "Comoros", "178": "Congo", "188": "Costa Rica", "191": "Croatia",
+            "192": "Cuba", "196": "Cyprus", "203": "Czech Republic", "208": "Denmark", "262": "Djibouti",
+            "212": "Dominica", "214": "Dominican Republic", "180": "DR Congo", "218": "Ecuador",
+            "818": "Egypt", "222": "El Salvador", "226": "Equatorial Guinea", "232": "Eritrea",
+            "233": "Estonia", "748": "Eswatini", "231": "Ethiopia", "242": "Fiji", "246": "Finland",
+            "250": "France", "266": "Gabon", "270": "Gambia", "268": "Georgia", "276": "Germany",
+            "288": "Ghana", "300": "Greece", "308": "Grenada", "320": "Guatemala", "324": "Guinea",
+            "624": "Guinea-Bissau", "328": "Guyana", "332": "Haiti", "340": "Honduras", "348": "Hungary",
+            "352": "Iceland", "356": "India", "360": "Indonesia", "364": "Iran", "368": "Iraq",
+            "372": "Ireland", "376": "Israel", "380": "Italy", "384": "Ivory Coast", "388": "Jamaica",
+            "392": "Japan", "400": "Jordan", "398": "Kazakhstan", "404": "Kenya", "296": "Kiribati",
+            "-99": "Kosovo", "414": "Kuwait", "417": "Kyrgyzstan", "418": "Laos", "428": "Latvia",
+            "422": "Lebanon", "426": "Lesotho", "430": "Liberia", "434": "Libya", "438": "Liechtenstein",
+            "440": "Lithuania", "442": "Luxembourg", "450": "Madagascar", "454": "Malawi",
+            "458": "Malaysia", "462": "Maldives", "466": "Mali", "470": "Malta", "584": "Marshall Islands",
+            "478": "Mauritania", "480": "Mauritius", "484": "Mexico", "583": "Micronesia",
+            "498": "Moldova", "492": "Monaco", "496": "Mongolia", "499": "Montenegro", "504": "Morocco",
+            "508": "Mozambique", "104": "Myanmar", "516": "Namibia", "520": "Nauru", "524": "Nepal",
+            "528": "Netherlands", "554": "New Zealand", "558": "Nicaragua", "562": "Niger",
+            "566": "Nigeria", "408": "North Korea", "807": "North Macedonia", "578": "Norway",
+            "512": "Oman", "586": "Pakistan", "585": "Palau", "275": "Palestine", "591": "Panama",
+            "598": "Papua New Guinea", "600": "Paraguay", "604": "Peru", "608": "Philippines",
+            "616": "Poland", "620": "Portugal", "634": "Qatar", "642": "Romania", "643": "Russia",
+            "646": "Rwanda", "659": "Saint Kitts and Nevis", "662": "Saint Lucia",
+            "670": "Saint Vincent and the Grenadines", "882": "Samoa", "674": "San Marino",
+            "678": "Sao Tome and Principe", "682": "Saudi Arabia", "686": "Senegal", "688": "Serbia",
+            "690": "Seychelles", "694": "Sierra Leone", "702": "Singapore", "703": "Slovakia",
+            "705": "Slovenia", "090": "Solomon Islands", "706": "Somalia", "710": "South Africa",
+            "410": "South Korea", "728": "South Sudan", "724": "Spain", "144": "Sri Lanka",
+            "729": "Sudan", "740": "Suriname", "752": "Sweden", "756": "Switzerland", "760": "Syria",
+            "158": "Taiwan", "762": "Tajikistan", "834": "Tanzania", "764": "Thailand",
+            "626": "Timor-Leste", "768": "Togo", "776": "Tonga", "780": "Trinidad and Tobago",
+            "788": "Tunisia", "792": "Turkey", "795": "Turkmenistan", "798": "Tuvalu", "800": "Uganda",
+            "804": "Ukraine", "784": "United Arab Emirates", "826": "United Kingdom",
+            "840": "United States", "858": "Uruguay", "860": "Uzbekistan", "548": "Vanuatu",
+            "336": "Vatican City", "862": "Venezuela", "704": "Vietnam", "887": "Yemen",
+            "894": "Zambia", "716": "Zimbabwe"
+        };
+
+        // Load and process the countries data
+        let countriesData = {};
+
+        Papa.parse('countries.csv', {
+            download: true,
+            header: true,
+            complete: function(results) {
+                // Process CSV data
+                results.data.forEach(row => {
+                    if (row.Country) {
+                        const links = [];
+                        for (let i = 1; i <= 10; i++) {
+                            const linkKey = 'Link' + i;
+                            if (row[linkKey] && row[linkKey].trim()) {
+                                links.push(row[linkKey].trim());
+                            }
+                        }
+
+                        countriesData[row.Country] = {
+                            cities: row.Cities ? row.Cities.split(',').map(c => c.trim()).filter(c => c) : [],
+                            links: links,
+                            visited: row.Cities && row.Cities.trim() !== ''
+                        };
+                    }
+                });
+
+                // After data is loaded, create the map
+                createMap();
+            }
+        });
+
+        function createMap() {
+            const width = 960;
+            const height = 500;
+
+            const svg = d3.select('.travel-map');
+            const tooltip = d3.select('.tooltip');
+
+            // Use Natural Earth projection
+            const projection = d3.geoNaturalEarth1()
+                .scale(150)
+                .translate([width / 2, height / 2]);
+
+            const path = d3.geoPath().projection(projection);
+
+            // Load world map data
+            d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
+                const countries = topojson.feature(world, world.objects.countries);
+
+                svg.selectAll('.country')
+                    .data(countries.features)
+                    .enter()
+                    .append('path')
+                    .attr('class', d => {
+                        const countryName = countryIdToName[String(d.id)] || '';
+                        const data = countriesData[countryName];
+                        return 'country ' + (data && data.visited ? 'visited' : 'unvisited');
+                    })
+                    .attr('d', path)
+                    .on('mouseover', function(event, d) {
+                        const countryName = countryIdToName[String(d.id)] || 'Unknown';
+                        const data = countriesData[countryName];
+
+                        if (data && data.visited) {
+                            let tooltipHTML = `<h3>${countryName}</h3>`;
+
+                            if (data.cities.length > 0) {
+                                tooltipHTML += `<div class="cities">Cities: ${data.cities.join(', ')}</div>`;
+                            }
+
+                            if (data.links.length > 0) {
+                                tooltipHTML += '<ul class="links">';
+                                data.links.forEach(link => {
+                                    tooltipHTML += `<li><a href="${link}" target="_blank">${link}</a></li>`;
+                                });
+                                tooltipHTML += '</ul>';
+                            }
+
+                            tooltip.html(tooltipHTML)
+                                .style('opacity', 1)
+                                .style('left', (event.pageX + 10) + 'px')
+                                .style('top', (event.pageY - 10) + 'px');
+                        }
+                    })
+                    .on('mousemove', function(event) {
+                        tooltip.style('left', (event.pageX + 10) + 'px')
+                               .style('top', (event.pageY - 10) + 'px');
+                    })
+                    .on('mouseout', function() {
+                        tooltip.style('opacity', 0);
+                    })
+                    .on('click', function(event, d) {
+                        const countryName = countryIdToName[String(d.id)] || '';
+                        const data = countriesData[countryName];
+
+                        if (data && data.visited) {
+                            event.stopPropagation();
+                        }
+                    });
+            });
+        }
+
+        // Click anywhere to hide tooltip
+        document.addEventListener('click', function() {
+            d3.select('.tooltip').style('opacity', 0);
+        });
+    </script>
+
+    <!-- start custom analytics snippet -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1YFKE5YHG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-N1YFKE5YHG');
+    </script>
+    <!-- end custom analytics snippet -->
+
+</body>
+</html>

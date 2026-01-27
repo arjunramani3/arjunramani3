@@ -1,0 +1,137 @@
+<h1 id="claudemd">CLAUDE.md</h1>
+
+<p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+
+<h2 id="repository-overview">Repository Overview</h2>
+
+<p>This is a personal website for Arjun Ramani (arjunramani.com), built with Jekyll and hosted on GitHub Pages. The site showcases research, writing, and professional work in economics and technology journalism.</p>
+
+<h2 id="development-commands">Development Commands</h2>
+
+<h3 id="building-and-testing">Building and Testing</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build the site locally</span>
+bundle <span class="nb">exec </span>jekyll build
+
+<span class="c"># Serve the site locally with live reload</span>
+bundle <span class="nb">exec </span>jekyll serve
+
+<span class="c"># The site will be available at http://localhost:4000</span>
+</code></pre></div></div>
+
+<h3 id="dependencies">Dependencies</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Ruby dependencies</span>
+bundle <span class="nb">install</span>
+
+<span class="c"># Update dependencies</span>
+bundle update
+</code></pre></div></div>
+
+<h2 id="site-architecture">Site Architecture</h2>
+
+<h3 id="build-system">Build System</h3>
+<ul>
+  <li><strong>Static Site Generator</strong>: Jekyll with GitHub Pages</li>
+  <li><strong>Dependencies</strong>: Managed via Gemfile using <code class="language-plaintext highlighter-rouge">github-pages</code> gem bundle</li>
+  <li><strong>Build Output</strong>: Generated to <code class="language-plaintext highlighter-rouge">_site/</code> directory (not committed to git)</li>
+  <li><strong>Configuration</strong>: <code class="language-plaintext highlighter-rouge">_config.yml</code> contains site metadata and Jekyll plugins</li>
+</ul>
+
+<h3 id="content-structure">Content Structure</h3>
+<p>The site uses static HTML files rather than Jekyll’s typical Markdown approach:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">index.html</code> - Homepage with bio and links</li>
+  <li><code class="language-plaintext highlighter-rouge">research.html</code> - Academic research and publications</li>
+  <li><code class="language-plaintext highlighter-rouge">writing.html</code> - Journalism and writing portfolio</li>
+  <li><code class="language-plaintext highlighter-rouge">portfolio.html</code> - Comprehensive list of articles by publication</li>
+  <li><code class="language-plaintext highlighter-rouge">cv.html</code> - CV with PDF link</li>
+  <li><code class="language-plaintext highlighter-rouge">india-dispatch.html</code> - Long-form essay on India reporting</li>
+</ul>
+
+<p>All pages share a common navigation structure in the <code class="language-plaintext highlighter-rouge">top-nav</code> div.</p>
+
+<h3 id="styling">Styling</h3>
+<ul>
+  <li><strong>Single Stylesheet</strong>: <code class="language-plaintext highlighter-rouge">styles.css</code> contains all styling</li>
+  <li><strong>Design System</strong>:
+    <ul>
+      <li>Primary color: <code class="language-plaintext highlighter-rouge">#008080</code> (teal) for links and navigation</li>
+      <li>Hover state: <code class="language-plaintext highlighter-rouge">#005959</code> (darker teal)</li>
+      <li>Font: Georgia serif for body text</li>
+      <li>Max content width: 800px</li>
+      <li>Responsive breakpoints at 768px and 480px for mobile</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="rssfeed">RSS/Feed</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">feed.xml</code> - Manually maintained RSS feed for new content</li>
+  <li>Update this file when publishing new essays or major updates</li>
+</ul>
+
+<h3 id="assets">Assets</h3>
+<ul>
+  <li>Images stored in root directory and <code class="language-plaintext highlighter-rouge">images/</code> subdirectory</li>
+  <li>Cover images from The Economist articles (webp/jpg format)</li>
+  <li><code class="language-plaintext highlighter-rouge">headshot-uk.jpg</code> - Profile photo</li>
+  <li><code class="language-plaintext highlighter-rouge">Ramani, Arjun CV.pdf</code> - CV document</li>
+</ul>
+
+<h2 id="content-maintenance">Content Maintenance</h2>
+
+<h3 id="adding-new-research">Adding New Research</h3>
+<p>Edit <code class="language-plaintext highlighter-rouge">research.html</code> and add to the appropriate section:</p>
+<ul>
+  <li>Published work</li>
+  <li>In progress</li>
+  <li>Policy work</li>
+  <li>Seminars &amp; talks</li>
+</ul>
+
+<h3 id="adding-new-writing">Adding New Writing</h3>
+<ol>
+  <li>Add to <code class="language-plaintext highlighter-rouge">writing.html</code> under “Best work” if featured</li>
+  <li>Always add to <code class="language-plaintext highlighter-rouge">portfolio.html</code> with full citation and date</li>
+  <li>Update <code class="language-plaintext highlighter-rouge">feed.xml</code> if it’s a major essay or dispatch</li>
+</ol>
+
+<h3 id="navigation-changes">Navigation Changes</h3>
+<p>The top navigation is duplicated across all HTML files. When modifying navigation:</p>
+<ol>
+  <li>Update the <code class="language-plaintext highlighter-rouge">top-nav</code> div structure in all files</li>
+  <li>Maintain consistency of links: Research, Writing, CV, Subscribe/RSS</li>
+</ol>
+
+<h3 id="analytics">Analytics</h3>
+<p>All pages include Google Analytics (gtag.js) with ID <code class="language-plaintext highlighter-rouge">G-N1YFKE5YHG</code> at the bottom of each file.</p>
+
+<h2 id="key-conventions">Key Conventions</h2>
+
+<h3 id="link-styling">Link Styling</h3>
+<p>All links use consistent teal color scheme (<code class="language-plaintext highlighter-rouge">#008080</code>) with visited state maintained. This applies to:</p>
+<ul>
+  <li>Navigation links</li>
+  <li>Content links</li>
+  <li>Sidebar links</li>
+  <li>Subscribe/RSS links</li>
+</ul>
+
+<h3 id="responsive-design">Responsive Design</h3>
+<p>The site has three layouts:</p>
+<ol>
+  <li>Desktop (&gt;768px): Full navigation, 800px content width</li>
+  <li>Tablet/Mobile (≤768px): Stacked navigation, full-width content</li>
+  <li>Small mobile (≤480px): Reduced fonts, compressed spacing</li>
+</ol>
+
+<h3 id="jekyll-configuration">Jekyll Configuration</h3>
+<p>Important settings in <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
+<ul>
+  <li>SEO tags enabled via <code class="language-plaintext highlighter-rouge">jekyll-seo-tag</code></li>
+  <li>Sitemap generation via <code class="language-plaintext highlighter-rouge">jekyll-sitemap</code></li>
+  <li>No theme applied (<code class="language-plaintext highlighter-rouge">theme: null</code>) - custom HTML/CSS only</li>
+</ul>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>The site is deployed via GitHub Pages automatically when changes are pushed to the master branch. The CNAME file contains <code class="language-plaintext highlighter-rouge">arjunramani.com</code> for custom domain routing.</p>
