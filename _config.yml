@@ -7,3 +7,10 @@ plugins:
   - jekyll-include-cache  
   - jekyll-optional-front-matter
 theme: null
+
+# Direct-only pages used for the Oura API application.
+collections:
+  oura_legal:
+    # Set to false to remove both /oura-app/ URLs on the next site build.
+    output: true
+    permalink: /oura-app/:name.html
